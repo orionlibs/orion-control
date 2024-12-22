@@ -1,13 +1,12 @@
 package io.github.orionlibs.orion_control.example.ready_pool;
 
 import io.github.orionlibs.orion_simulation.chart.Chart;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CloseLoopSimulator
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         Buffer sys = new Buffer(10, 5);
         Controller c = new Controller(1.25, 0.01);
@@ -25,11 +24,9 @@ public class CloseLoopSimulator
             objectsInBuffer.add((double)y);
             //System.out.println("i = " + i + "--r = " + r + "--error = " + error + "--numberOfObjectsToAddToTheReadyPool = " + numberOfObjectsToAddToTheReadyPool + "--y = " + y);
         }
-
-
         double[] xData = timeSteps.stream().mapToDouble(d -> d).toArray();
         double[] yData = objectsInBuffer.stream().mapToDouble(d -> d).toArray();
-        Chart.show2DPlot(xData, yData);
+        Chart.show2DPlot("Sample Chart", "time steps", "objects in buffer", "y(x)", xData, yData);
     }
 
 
